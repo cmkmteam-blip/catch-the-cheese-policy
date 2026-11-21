@@ -1,0 +1,19 @@
+﻿name: Keep Catch the Cheese Supabase Alive
+
+on:
+  schedule:
+    # Runs every 4 days at 12:00 UTC so Supabase Free Tier NEVER auto-pauses!
+    - cron: '0 12 */4 * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Keep-Alive RPC
+        run: |
+          curl -sf -X POST "https://enxkfzpcidwyvmpmlbkv.supabase.co/rest/v1/rpc/keep_alive_ping" \
+            -H "apikey: sb_publishable_JV3V1Bw96qexl0WJv-FoqA_26CJUX_a" \
+            -H "Authorization: Bearer sb_publishable_JV3V1Bw96qexl0WJv-FoqA_26CJUX_a" \
+            -H "Content-Type: application/json" \
+            -d '{}'
